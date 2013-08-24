@@ -10,7 +10,7 @@ $countries = array('AF' => 'Afghanistan', 'AL' => 'Albania', 'DZ' => 'Algeria', 
 
 foreach ($countries as $code => $name)
 {
-	$qry = "UPDATE recipient SET name='" . addslashes($name) . "' WHERE country_code='$code'";
+	$qry = "INSERT INTO recipient SET name='" . addslashes($name) . "', country_code='$code'";
 	mysql_query($qry);
 }
 
