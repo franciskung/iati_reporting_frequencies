@@ -3,12 +3,12 @@
 {% block title %}IATI Report Card – Donors{% endblock %}
 
 {% block content %}
-<h1>IATI Donor Information</h1>
+<h1>IATI Donor Information ({{ max_count }})</h1>
     <p class="lead">The following countries are listed by number of IATI-recorded activities.</p>
 
     {% for country in countries %}
     <div>
-      <h2><a href="{{ init.urlBase }}?path=donors&donor={{ country.name|toAscii }}">{{ country.name }}</a> <small>{{ country.total }}</small></h2>
+      <h2><a href="{{ init.urlBase }}?path=donors&donor={{ country.name|toAscii }}">{{ country.name }}</a> <small>{{ country.total }} Activities ({{ country.added }}&nbsp;New)</small></h2>
       
       <div class="progress">
         <div class="progress-bar" style="width: {{ ((country.total - country.added) / max_count * 100)|round2 }}%">

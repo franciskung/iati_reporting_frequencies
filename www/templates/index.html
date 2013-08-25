@@ -10,16 +10,21 @@
 
 <table id="countries_list" class="table countries" border="0">
   <thead>
-	<tr><th class="country" data-sort="string">Donor Country</th><th class="date" data-sort="int">Last Updated</th><th class="numadded" data-sort="int">Activities Added</th></tr>
+	<tr><th class="country" data-sort="string" style="width: 40%">Donor Country</th><th class="date" data-sort="int" style="width: 23%">Last Updated</th><th class="numadded" data-sort="int" style="width: 20%">Activities Added</th><th class="numtotal" data-sort="int" style="width: 17%">Total Activities</th></tr>
   </thead>
   <tbody>
 	
     {% for country in countries %}
+      {% if country.name %}
+    
     <tr>
       <td class="country" data-sort-value="{{ country.name|lower }}"><a href="{{ init.urlBase }}?path=donors&donor={{ country.name|toAscii }}">{{ country.name }}</a></td>
-      <td class="date" data-sort-value="{{ country.updated }}">{{ country.updated }}</td>
+      <td class="date" data-sort-value="{{ country.updated|replace({' ': '-'}) }}">{{ country.updated|date("F d, Y") }}</td>
       <td class="numadded" data-sort-value="{{ country.added }}">{{ country.added }} &nbsp;<span class="text-muted">(+ {{ ((country.added + country.total) / country.total * 100 - 100)|round2 }}%)</span></td>
+      <td class="numtotal" data-sort-value="{{ country.total }}">{{ country.total }}</td>
     </tr>
+      {% endif %}
+    
     {% endfor %}	
 
   </tbody>
