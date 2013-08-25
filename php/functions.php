@@ -4,6 +4,17 @@
 mysql_connect("localhost", "iatifreqs", "iatifreqs");
 mysql_select_db("iatireportcard");
 
+$org_types = array(	10 => 'Government',
+					15 => 'Other Public Sector',
+					21 => 'International NGO',
+					22 => 'National NGO',
+					23 => 'Regional NGO',
+					30 => 'Public Private Partnership',
+					40 => 'Multilateral',
+					60 => 'Foundation',
+					70 => 'Private Sector',
+					80 => 'Academic, Training and Research');
+
 function getPublisherTotals($type = null, $order = null)
 {
 	$publishers = array();
