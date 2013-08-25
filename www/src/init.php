@@ -28,4 +28,9 @@ $filter = new Twig_SimpleFilter('toAscii', function ($string) {
 });
 $twig->addFilter($filter);
 
+$filter = new Twig_SimpleFilter('strtotime', function ($string) {
+    return strtotime($string);
+});
+$twig->addFilter($filter);
+
 ?>
