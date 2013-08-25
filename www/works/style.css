@@ -15,3 +15,12 @@ table.countries td, table.countries th {
 span.arrow {
   margin: 0 5px;
 }
+
+div.crazy-visual {
+  background-color: rgb(42, 100, 150);
+  height: 200px;
+  width: 100%;
+  
+  margin-bottom: 20px;
+  
+}

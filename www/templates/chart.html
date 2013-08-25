@@ -1,0 +1,41 @@
+<style>
+#pulsechart {
+}
+
+#pulsechart svg {
+	width:100%;
+	height:300px;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}
+
+.line {
+  fill: none;
+  stroke: steelblue;
+  stroke-width: 1.5px;
+}
+
+</style>
+<script src="http://d3js.org/d3.v3.js" charset="utf-8"></script>
+<script type="text/javascript" charset="utf-8">
+	var pulsefile = ""; // point to csv pulse file
+	var pulsefile = "{{ init.urlBase }}js/global_example.csv";
+
+	if (current_page == 'donor')
+		var pulsefile = "{{ init.urlBase }}js/org_example.csv";
+		
+//	var pulsefile = "{{ init.urlBase }}csvgen.php";
+</script>
+<script src="{{ init.urlBase }}js/showpulse.js" type="text/javascript" charset="utf-8"></script>
+<div id="pulsechart">
+	
+</div>

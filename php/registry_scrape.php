@@ -54,7 +54,7 @@ while ($current_record < $all_records)
 						iati_activity_id='" . addslashes($activity_id) . "', 
 						iati_revision_id='" . addslashes($rev_id) . "', 
 						name='" . addslashes($name) . "',
-						`timestamp`='" . addslashes($timestamp) . "', 
+						timestamp='" . addslashes($timestamp) . "', 
 						publisher_id='" . addslashes($pub_id) . "', 
 						recipient_id='" . addslashes($recipient_id) . "', 
 						activity_count='" . addslashes($activity_count) . "',

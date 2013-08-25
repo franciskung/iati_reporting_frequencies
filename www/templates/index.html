@@ -3,14 +3,44 @@
 {% block title %}IATI Report Card{% endblock %}
 
 {% block content %}
+	<script>
+		var current_page = 'home';
+	</script>
+
     <h1>Latest IATI Updates</h1>
     <p class="lead">The countries below publish data according to the IATI standard. Countries are listed in order of most recent updates, by default. Cheers to donors and publishers that publish at a high frequency!</p>
     
+    {% include 'chart.html' %}
 
+<div style="margin-top:20px;">
+  <h2 class="pull-left" style="margin-top:0;">Updates{% if filterName %}: {{ filterName }} <small><a href="{{ init.baseURL }}?filter=0">See all</a></small>{% endif %}
+    
+  </h2>
+  <div class="pull-right">
+    <div class="btn-group">
+      <a type="button" class="btn btn-default" href="{{ init.urlBase }}?filter=0">All</a>
+      <a type="button" class="btn btn-default" href="{{ init.urlBase }}?filter=10">Governments</a>
+    
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          More...
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu pull-right">
+        {% for key, org in init.orgs %}
+          <li><a href="{{ init.urlBase }}?filter={{ key }}">{{ org }}</a></li>
+        {% endfor %}
 
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% block countryTable %}
 <table id="countries_list" class="table countries" border="0">
   <thead>
-	<tr><th class="country" data-sort="string" style="width: 40%">Donor Country</th><th class="date" data-sort="int" style="width: 23%">Last Updated</th><th class="numadded" data-sort="int" style="width: 20%">Activities Added</th><th class="numtotal" data-sort="int" style="width: 17%">Total Activities</th></tr>
+	<tr><th class="country" data-sort="string" style="width: 37%">Publisher</th><th class="date" data-sort="int" style="width: 23%">Last Updated<span class="arrow">&uarr;</span></th><th class="numadded" data-sort="int" style="width: 20%">Activities Added</th><th class="numtotal" data-sort="int" style="width: 20%">Total Activities</th></tr>
   </thead>
   <tbody>
 	
@@ -18,9 +48,16 @@
       {% if country.name %}
     
     <tr>
-      <td class="country" data-sort-value="{{ country.name|lower }}"><a href="{{ init.urlBase }}?path=donors&donor={{ country.name|toAscii }}">{{ country.name }}</a></td>
-      <td class="date" data-sort-value="{{ country.updated|replace({' ': '-'}) }}">{{ country.updated|date("F d, Y") }}</td>
-      <td class="numadded" data-sort-value="{{ country.added }}">{{ country.added }} &nbsp;<span class="text-muted">(+ {{ ((country.added + country.total) / country.total * 100 - 100)|round2 }}%)</span></td>
+      <td class="country" data-sort-value="{{ country.name|lower }}"><a href="{{ init.urlBase }}?path=donors&donor={{ country.group_id }}">{{ country.name }}</a></td>
+      <td class="date" data-sort-value="{{ country.updated|strtotime }}">{{ country.updated|date("F d, Y") }}</td>
+      <td class="numadded" data-sort-value="{{ country.added }}">{{ country.added }}
+      
+      
+       &nbsp;<span class="text-muted">(+ {% if country.total > 0 %}{{ ((country.added + country.total) / country.total * 100 - 100)|round2 }}{% else %}0{% endif %}%)</span>
+      
+      
+
+       </td>
       <td class="numtotal" data-sort-value="{{ country.total }}">{{ country.total }}</td>
     </tr>
       {% endif %}
@@ -30,6 +67,9 @@
   </tbody>
 
 </table>
+
+{% endblock %}
+
     
 {% endblock %}
 
@@ -47,6 +87,7 @@
         var arrow = data.direction === dir.ASC ? "&darr;" : "&uarr;";
         th.eq(data.column).append('<span class="arrow">' + arrow +'</span>');
       });
+			if(showpulse) showpulse();
    });
     </script>
 

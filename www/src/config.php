@@ -2,7 +2,7 @@
 
 
 $initSettings = array(
-  'urlBase' => '/iatifreq/www/',  // initial part of URLs for the navbar etc.
+  'urlBase' => '/',  // initial part of URLs for the navbar etc.
 
 );
 
