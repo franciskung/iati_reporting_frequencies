@@ -4,8 +4,8 @@
     <title>{% block title %}IATI Report Card{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap -->
-    <link href="dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
-    <link href="works/style.css" rel="stylesheet" media="screen">
+    <link href="{{ init.urlBase }}dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="{{ init.urlBase }}works/style.css" rel="stylesheet" media="screen">
 
   </head>
   <body>
@@ -52,8 +52,8 @@
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="//code.jquery.com/jquery.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="dist/js/bootstrap.min.js"></script>
-    <script src="works/stupidtable.min.js"></script>
+    <script src="{{ init.urlBase }}dist/js/bootstrap.min.js"></script>
+    <script src="{{ init.urlBase }}works/stupidtable.min.js"></script>
     
 {% block js %}
 
