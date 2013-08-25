@@ -63,6 +63,8 @@ if(isset($_GET['path']) && $_GET['path'] == 'donors') {
   
 
   if(isset($_GET['filter']) && intval($_GET['filter']) != 0) {
+  
+    $templateData['filterNumber'] = intval($_GET['filter']);
     
     $templateData['filterName'] = $templateData['init']['orgs'][intval($_GET['filter'])];
     
@@ -70,6 +72,8 @@ if(isset($_GET['path']) && $_GET['path'] == 'donors') {
     
   }
   else {
+    $templateData['filterNumber'] = 0;
+      
     $countryData = getPublisherTotals();
   }
 

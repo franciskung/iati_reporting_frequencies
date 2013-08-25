@@ -11,7 +11,7 @@ $org_types = array(	10 => 'Governments',
 					23 => 'Regional NGOs',
 					30 => 'Public Private Partnerships',
 					40 => 'Multilateral',
-					60 => 'Foundation',
+					60 => 'Foundations',
 					70 => 'Private Sector',
 					80 => 'Academic, Training and Research');
 

@@ -3,10 +3,6 @@
 {% block title %}IATI Report Card{% endblock %}
 
 {% block content %}
-	<script>
-		var current_page = 'home';
-	</script>
-
     <h1>Latest IATI Updates</h1>
     <p class="lead">The countries below publish data according to the IATI standard. Countries are listed in order of most recent updates, by default. Cheers to donors and publishers that publish at a high frequency!</p>
     
@@ -18,8 +14,8 @@
   </h2>
   <div class="pull-right">
     <div class="btn-group">
-      <a type="button" class="btn btn-default" href="{{ init.urlBase }}?filter=0">All</a>
-      <a type="button" class="btn btn-default" href="{{ init.urlBase }}?filter=10">Governments</a>
+      <a type="button" class="btn btn-default {% if filterNumber == 0 %}btn-primary{% endif %}" href="{{ init.urlBase }}?filter=0">All</a>
+      <a type="button" class="btn btn-default {% if filterNumber == 10 %}btn-primary{% endif %}" href="{{ init.urlBase }}?filter=10">Governments</a>
     
       <div class="btn-group">
         <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
