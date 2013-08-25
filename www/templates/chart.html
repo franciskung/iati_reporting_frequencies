@@ -29,7 +29,10 @@
 <script type="text/javascript" charset="utf-8">
 	var pulsefile = ""; // point to csv pulse file
 	var pulsefile = "{{ init.urlBase }}js/global_example.csv";
-	var pulsefile = "{{ init.urlBase }}js/org_example.csv";
+
+	if (current_page == 'donor')
+		var pulsefile = "{{ init.urlBase }}js/org_example.csv";
+		
 //	var pulsefile = "{{ init.urlBase }}csvgen.php";
 </script>
 <script src="{{ init.urlBase }}js/showpulse.js" type="text/javascript" charset="utf-8"></script>
