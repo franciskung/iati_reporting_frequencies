@@ -60,6 +60,8 @@
         var arrow = data.direction === dir.ASC ? "&darr;" : "&uarr;";
         th.eq(data.column).append('<span class="arrow">' + arrow +'</span>');
       });
+      
+      if(showpulse) showpulse();
    });
     </script>
 
