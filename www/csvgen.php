@@ -62,7 +62,8 @@ while ($row = mysql_fetch_array($result))
 	
 	//fputcsv($out, array($row['ts'], $row['activity_delta']));
 	// sample data...!!
-	fputcsv($out, array($row['ts'], $theRand));
+//	fputcsv($out, array($row['ts'], $theRand));
+	fputcsv($out, array($row['ts'], $row['activity_count']));
 }
 
 

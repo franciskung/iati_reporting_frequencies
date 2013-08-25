@@ -6,13 +6,16 @@ require_once('src/database_functions.php');
 require_once('../php/functions.php');
 
 
-$countryData = getPublisherTotals();
+
 
 $templateData = array();
+$initSettings['orgs'] = $org_types;
 $templateData['init'] = $initSettings;
 
 
 if(isset($_GET['path']) && $_GET['path'] == 'donors') {
+
+  $countryData = getPublisherTotals();
   
   if(isset($_GET['donor'])) {
   
@@ -49,11 +52,26 @@ if(isset($_GET['path']) && $_GET['path'] == 'donors') {
   
 } elseif(isset($_GET['path']) && $_GET['path'] == 'recipients') {
 
+  $countryData = getPublisherTotals();
+
   $templateData += array('path' => 'recipients', 'countries' => $countryData);
 
   echo $twig->render('recipients.html', $templateData);
 
 } else {
+
+  
+
+  if(isset($_GET['filter']) && intval($_GET['filter']) != 0) {
+    
+    $templateData['filterName'] = $templateData['init']['orgs'][intval($_GET['filter'])];
+    
+    $countryData = getPublisherTotals(intval($_GET['filter']));
+    
+  }
+  else {
+    $countryData = getPublisherTotals();
+  }
 
   $templateData += array('path' => 'index', 'countries' => $countryData['countries']);
 

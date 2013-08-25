@@ -4,12 +4,12 @@
 mysql_connect("localhost", "iatifreqs", "iatifreqs");
 mysql_select_db("iatireportcard");
 
-$org_types = array(	10 => 'Government',
+$org_types = array(	10 => 'Governments',
 					15 => 'Other Public Sector',
-					21 => 'International NGO',
-					22 => 'National NGO',
-					23 => 'Regional NGO',
-					30 => 'Public Private Partnership',
+					21 => 'International NGOs',
+					22 => 'National NGOs',
+					23 => 'Regional NGOs',
+					30 => 'Public Private Partnerships',
 					40 => 'Multilateral',
 					60 => 'Foundation',
 					70 => 'Private Sector',

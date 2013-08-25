@@ -8,9 +8,35 @@
     
     {% include 'chart.html' %}
 
+<div style="margin-top:20px;">
+  <h2 class="pull-left" style="margin-top:0;">Updates{% if filterName %}: {{ filterName }} <small><a href="{{ init.baseURL }}?filter=0">See all</a></small>{% endif %}
+    
+  </h2>
+  <div class="pull-right">
+    <div class="btn-group">
+      <a type="button" class="btn btn-default" href="{{ init.urlBase }}?filter=0">All</a>
+      <a type="button" class="btn btn-default" href="{{ init.urlBase }}?filter=10">Governments</a>
+    
+      <div class="btn-group">
+        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+          More...
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu pull-right">
+        {% for key, org in init.orgs %}
+          <li><a href="{{ init.urlBase }}?filter={{ key }}">{{ org }}</a></li>
+        {% endfor %}
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% block countryTable %}
 <table id="countries_list" class="table countries" border="0">
   <thead>
-	<tr><th class="country" data-sort="string" style="width: 37%">Donor Country</th><th class="date" data-sort="int" style="width: 23%">Last Updated<span class="arrow">&uarr;</span></th><th class="numadded" data-sort="int" style="width: 20%">Activities Added</th><th class="numtotal" data-sort="int" style="width: 20%">Total Activities</th></tr>
+	<tr><th class="country" data-sort="string" style="width: 37%">Publisher</th><th class="date" data-sort="int" style="width: 23%">Last Updated<span class="arrow">&uarr;</span></th><th class="numadded" data-sort="int" style="width: 20%">Activities Added</th><th class="numtotal" data-sort="int" style="width: 20%">Total Activities</th></tr>
   </thead>
   <tbody>
 	
@@ -37,6 +63,9 @@
   </tbody>
 
 </table>
+
+{% endblock %}
+
     
 {% endblock %}
 
