@@ -19,7 +19,7 @@ function getPublisherTotals($type = null, $order = null)
 {
 	$publishers = array();
 
-	$qry = "SELECT p.id, p.name, u.timestamp, u.activity_count, u.activity_delta AS updated FROM publisher p, iati_update u WHERE u.publisher_id=p.id";
+	$qry = "SELECT p.id, p.name, p.iati_group, u.timestamp, u.activity_count, u.activity_delta AS updated FROM publisher p, iati_update u WHERE u.publisher_id=p.id";
 
 	if ($type)
 		$qry .= " AND p.type=$type";
