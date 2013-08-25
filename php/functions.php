@@ -30,20 +30,20 @@ function getPublisherTotals($type = null, $order = null)
 			$row['activity_delta'] = 0;
 			
 		$publishers[$row['id']]['name'] = $row['name'];
+		$publishers[$row['id']]['total'] = $publishers[$row['id']]['total'] + $row['activity_count'];
 
 		if ($publishers[$row['id']]['updated'] < $row['timestamp'])
 		{
 			$publishers[$row['id']]['updated'] = $row['timestamp'];			
-			$publishers[$row['id']]['added'] = $row['activity_delta'];
+
+			//$publishers[$row['id']]['added'] = $row['activity_delta'];
+			// erm. sample data time.
+			$publishers[$row['id']]['added'] = rand(0, $publishers[$row['id']]['total']);
 		}
 		
-		$publishers[$row['id']]['total'] = $publishers[$row['id']]['total'] + $row['activity_count'];
 	}
 
-	return $publishers;
+	return array('countries' => $publishers, 'max_count' => count($publishers));
 }
-
-var_dump(getPublisherTotals());
-
 
 ?>
