@@ -42,7 +42,20 @@ if(isset($_GET['path']) && $_GET['path'] == 'donors') {
     echo $twig->render('donor.html', $templateData);
 
   } else {
-    $templateData += array('path' => 'donors', 'countries' => $countryData['countries'], 'max_count' => $countryData['max_count']);
+  
+    $sortedCountries = array();
+  
+    foreach($countryData['countries'] as $country) {
+      
+      $sortedCountries[$country['total']] = $country;
+      
+    }
+    krsort($sortedCountries);
+    
+    //var_dump($sortedCountries);
+  
+  
+    $templateData += array('path' => 'donors', 'countries' => $sortedCountries, 'max_count' => $countryData['max_count']);
     
     echo $twig->render('donors.html', $templateData);
 
