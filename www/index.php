@@ -17,6 +17,17 @@ if(isset($_GET['path']) && $_GET['path'] == 'donors') {
   if(isset($_GET['donor'])) {
   
     $templateData += array('path' => 'donors', 'name' => $_GET['donor']);
+    
+    $currentCountry = array();
+    foreach($countryData['countries'] as $country) {
+      
+      if($country['group_id'] == $_GET['donor']) {
+        $currentCountry = $country;
+      }
+      
+    }
+
+    $templateData['current'] = $currentCountry;
   
     echo $twig->render('donor.html', $templateData);
 
