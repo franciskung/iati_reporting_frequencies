@@ -18,6 +18,8 @@ if(isset($_GET['path']) && $_GET['path'] == 'donors') {
   
     $templateData += array('path' => 'donors', 'name' => $_GET['donor']);
     
+    
+    
     $currentCountry = array();
     foreach($countryData['countries'] as $country) {
       
@@ -28,6 +30,11 @@ if(isset($_GET['path']) && $_GET['path'] == 'donors') {
     }
 
     $templateData['current'] = $currentCountry;
+  
+    $templateData['currentData'] = getSinglePublisher(strval($_GET['donor']));
+  
+    
+    //var_dump($templateData['currentData']['history']);
   
     echo $twig->render('donor.html', $templateData);
 

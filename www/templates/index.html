@@ -6,10 +6,7 @@
     <h1>Latest IATI Updates</h1>
     <p class="lead">The countries below publish data according to the IATI standard. Countries are listed in order of most recent updates, by default. Cheers to donors and publishers that publish at a high frequency!</p>
     
-    <div class="crazy-visual">
-    
-    </div>
-
+    {% include 'chart.html' %}
 
 <table id="countries_list" class="table countries" border="0">
   <thead>
@@ -21,7 +18,7 @@
       {% if country.name %}
     
     <tr>
-      <td class="country" data-sort-value="{{ country.name|lower }}"><a href="{{ init.urlBase }}?path=donors&donor={{ country.name|toAscii }}">{{ country.name }}</a></td>
+      <td class="country" data-sort-value="{{ country.name|lower }}"><a href="{{ init.urlBase }}?path=donors&donor={{ country.group_id }}">{{ country.name }}</a></td>
       <td class="date" data-sort-value="{{ country.updated|strtotime }}">{{ country.updated|date("F d, Y") }}</td>
       <td class="numadded" data-sort-value="{{ country.added }}">{{ country.added }}
       
@@ -57,6 +54,7 @@
         var arrow = data.direction === dir.ASC ? "&darr;" : "&uarr;";
         th.eq(data.column).append('<span class="arrow">' + arrow +'</span>');
       });
+			if(showpulse) showpulse();
    });
     </script>
 

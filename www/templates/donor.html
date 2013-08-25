@@ -7,5 +7,53 @@
     <p class="lead">Details for {{ current.name }} are below.</p>
 
 
+{# rray(24257) { [0]=> array(4) { ["time"]=> string(19) "2013-08-25 00:30:44" ["country_name"]=> string(18) "Dominican Republic" ["country_code"]=> string(2) "DO" ["delta"]=> int(5) } #}
 
+<h2>History</h2>
+<table id="countries_list" class="table countries" border="0">
+  <thead>
+	<tr><th class="date" data-sort="int" style="width: 23%">Last Updated<span class="arrow">&uarr;</span></th><th class="country" data-sort="string" style="width: 37%">Recipient Country</th><th class="numtotal" data-sort="int" style="width: 20%">New Activities</th></tr>
+  </thead>
+  <tbody>
+	
+    {% for entry in currentData.history %}
+      {% if entry.delta > 0 %}
+    
+    <tr>
+      <td class="date" data-sort-value="{{ entry.time|strtotime }}">{{ entry.time }}</td>
+      <td class="country" data-sort-value="{{ entry.country_name|lower }}">{{ entry.country_name }}</td>
+
+      <td class="numadded" data-sort-value="{{ entry.delta }}">{{ entry.delta }}</td>
+
+    </tr>
+
+      {% endif %}
+    {% endfor %}	
+
+  </tbody>
+
+</table>
+
+
+
+{% endblock %}
+
+{% block js %}
+{% verbatim %}    
+    <script>
+  $(function(){
+      var countries_table = $("#countries_list").stupidtable();
+      
+      countries_table.on("aftertablesort", function (event, data) {
+        var th = $(this).find("th");
+        th.find(".arrow").remove();
+        var dir = $.fn.stupidtable.dir;
+
+        var arrow = data.direction === dir.ASC ? "&darr;" : "&uarr;";
+        th.eq(data.column).append('<span class="arrow">' + arrow +'</span>');
+      });
+   });
+    </script>
+
+{% endverbatim %}
 {% endblock %}
