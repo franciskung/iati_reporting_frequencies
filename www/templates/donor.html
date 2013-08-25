@@ -8,7 +8,7 @@
 </script>
 
 <h1>IATI Donor Information: {{ current.name }}</h1>
-    <p class="lead">Details for {{ current.name }} are below.</p>
+    <p class="lead">Details for <b>{{ current.name }}</b> are below.</p>
 
 
 {# rray(24257) { [0]=> array(4) { ["time"]=> string(19) "2013-08-25 00:30:44" ["country_name"]=> string(18) "Dominican Republic" ["country_code"]=> string(2) "DO" ["delta"]=> int(5) } #}
@@ -24,8 +24,11 @@
   </thead>
   <tbody>
 	
+	{% set areEntries = 0 %}
+	
     {% for entry in currentData.history %}
       {% if entry.delta > 0 %}
+      	{% set areEntries = 1 %}
     
     <tr>
       <td class="date" data-sort-value="{{ entry.time|strtotime }}">{{ entry.time }}</td>
@@ -37,11 +40,14 @@
 
       {% endif %}
     {% endfor %}	
+    
+
 
   </tbody>
 
 </table>
 
+    {% if areEntries == 0 %}<p style="text-align: center;"><em>No entries available</em></p>{% endif %}
 
 
 {% endblock %}
