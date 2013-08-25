@@ -3,10 +3,10 @@ require_once('src/init.php');
 require_once('src/functions.php');
 
 require_once('src/database_functions.php');
+require_once('../php/functions.php');
 
 
-$countryData = getCountryTotals();
-
+$countryData = getPublisherTotals();
 
 $templateData = array();
 $templateData['init'] = $initSettings;
