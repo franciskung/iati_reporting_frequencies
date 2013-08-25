@@ -29,10 +29,13 @@ while ($current_record < $all_records)
 		// Variables to make life easier
 		$activity_id = $r['index_id'];
 		$rev_id = $r['revision_id'];
+		$name = $r['title'];
 		$groups = $r['groups'];
 		$recipient = $r['extras']['country'];
 		$activity_count = $r['extras']['activity_count'];
 		$timestamp = normalize_timestamp($r['metadata_modified']);
+
+		echo " - $name ";
 
 		// Check if this revision is already in our database...
 		$qry = "SELECT id FROM iati_update WHERE iati_revision_id='" . addslashes($rev_id) . "'";
@@ -44,13 +47,18 @@ while ($current_record < $all_records)
 			$pub_id = get_publisher($groups);
 			$recipient_id = get_recipient($recipient);
 
+			$qry2 = "UPDATE iati_update SET current=0 WHEREiati_activity_id='" . addslashes($activity_id) . "'";
+			mysql_query($qry2); 
+
 			$qry2 = "INSERT INTO iati_update SET
 						iati_activity_id='" . addslashes($activity_id) . "', 
 						iati_revision_id='" . addslashes($rev_id) . "', 
+						name='" . addslashes($name) . "',
 						`timestamp`='" . addslashes($timestamp) . "', 
 						publisher_id='" . addslashes($pub_id) . "', 
 						recipient_id='" . addslashes($recipient_id) . "', 
-						activity_count='" . addslashes($activity_count) . "'";
+						activity_count='" . addslashes($activity_count) . "',
+						current=1";
 			mysql_query($qry2);
 			echo " - added <br/>";
 		}
@@ -65,6 +73,10 @@ while ($current_record < $all_records)
 }
 
 curl_close($ch);
+
+echo "<hr/>done";
+
+
 
 // Oh.  mySQL will do this for me, for free. =)
 function normalize_timestamp($ts)
